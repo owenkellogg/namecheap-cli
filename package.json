@@ -1,0 +1,21 @@
+{
+  "name": "namecheap-cli",
+  "version": "1.0.0",
+  "description": "command line interface to namecheap.com api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "namecheap": "bin/namecheap-cli.js"
+  },
+  "author": "stevenzeiler",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "superagent": "^2.1.0",
+    "winston": "^2.2.0",
+    "xml2js": "^0.4.17"
+  }
+}
