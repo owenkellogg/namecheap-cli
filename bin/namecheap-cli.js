@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+var Table = require('cli-table');
 const Logger = require("winston")
 const program = require("commander")
 const client = require("../lib/NamecheapClient")({
@@ -63,7 +64,47 @@ program
     })
   })
 
+program
+  .command('ssl.getList')
+  .action(() => {
+
+    Logger.info('ssl.getList')
+
+    client.ssl.getList().then(list => {
+      Logger.info('ssl.getList:success')
+      console.log(list)
+
+      var table = new Table({
+          head: ['HostName', 'CertificateID']
+        , colWidths: [40, 20]
+      });
+
+      // table is an Array, so you can `push`, `unshift`, `splice` and friends
+      list.forEach(item => {
+        table.push([item['$']['HostName'],item['$']['CertificateID']])
+      })
+
+      console.log(table)
+      console.log(table.toString())
+    })
+    .catch(error => {
+      Logger.error('ssl.getList:error', error)
+    })
+  })
+
+program
+  .command('ssl.activate <certificateId> <domain> <csrPath>')
+  .action((certificateId, domain, csrPath) => {
+
+    Logger.info(`ssl.activate(${certificateId}, ${domain}, ${csrPath}})`)
+
+    client.ssl.activate(certificateId, domain, csrPath).then(cert => {
+      console.log(cert.SSLActivateResult[0]['$'].IsSuccess)
+    })
+    .catch(error => {
+      Logger.error("ssl.activate:error", error)
+    })
+  })
+
 program.parse(process.argv)
-
-
 
