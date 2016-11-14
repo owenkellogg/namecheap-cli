@@ -106,5 +106,33 @@ program
     })
   })
 
+program
+  .command('ssl.getInfo <certificateId>')
+  .action((certificateId) => {
+
+    Logger.info(`ssl.getInfo(${certificateId})`)
+
+    client.ssl.getInfo(certificateId).then(info => {
+      Logger.info(info)
+    })
+    .catch(error => {
+      Logger.error("ssl.activate:error", error)
+    })
+  })
+
+program
+  .command('domains.create <domain>')
+  .action((domain) => {
+
+    Logger.info(`domains.create(${domain})`)
+
+    client.domains.create(domain).then(info => {
+      Logger.info(info)
+    })
+    .catch(error => {
+      Logger.error("domains.create:error", error)
+    })
+  })
+
 program.parse(process.argv)
 
