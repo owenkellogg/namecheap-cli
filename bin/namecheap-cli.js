@@ -134,5 +134,19 @@ program
     })
   })
 
+program
+  .command('domains.getList')
+  .action(() => {
+
+    Logger.info(`domains.getList()`)
+
+    client.domains.getList().then(info => {
+      Logger.info(info)
+    })
+    .catch(error => {
+      Logger.error("domains.create:error", error)
+    })
+  })
+
 program.parse(process.argv)
 
