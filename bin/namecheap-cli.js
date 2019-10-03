@@ -3,10 +3,12 @@
 var Table = require('cli-table');
 const Logger = require("winston")
 const program = require("commander")
+
 const client = require("../lib/NamecheapClient")({
   ipAddress: process.env.NAMECHEAP_CLIENT_IP_ADDRESS,
   apiKey: process.env.NAMECHEAP_API_KEY
 })
+
 const colors = require('colors')
 
 program
@@ -16,6 +18,9 @@ program
 
 
     client.checkDomain(domain).then(result => {
+
+      console.log(result);
+
       Logger.info(colors.white('domain:check:complete'))
 
       if (result.Available === "true") {
