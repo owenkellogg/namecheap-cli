@@ -1,6 +1,6 @@
 {
   "name": "namecheap-cli",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "command line interface to namecheap.com api",
   "main": "index.js",
   "scripts": {
